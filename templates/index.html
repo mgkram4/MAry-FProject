@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="bento-grid">
+        <div class="bento-item item1">
+            <p>Temperature One: {{ temperatures.temp1 }}</p>
+        </div>
+        <div class="bento-item item2">
+            <p>Temperature Two: {{ temperatures.temp2 }}</p>
+        </div>
+        <div class="bento-item item3">
+            <p>Temperature Three: {{ temperatures.temp3 }}</p>
+        </div>
+        <div class="bento-item item4">
+            <p>Temperature Four: {{ temperatures.temp4 }}</p>
+        </div>
+        <div class="bento-item item5">
+            <p>Temperature Five: {{ temperatures.temp5 }}</p>
+        </div>
+    </div>
+</body>
+</html>
