@@ -12,28 +12,59 @@ def homepage():
 def submit_weather():
     data = request.form
     
-    # Extract the form data
-    temperatures = {
-        't1': data.get('T1'),
-        't2': data.get('T2'),
-        't3': data.get('T3')
-    }
+    # Extract and convert temperatures to integers
+    t1 = int(data.get('T1'))
+    t2 = int(data.get('T2'))
+    t3 = int(data.get('T3'))
     
-    rain_probability = {
-        'day1': data.get('R1'),
-        'day2': data.get('R2'),
-        'day3': data.get('R3')
-    }
+    # Calculate average temperature
+    avg_temp = (t1 + t2 + t3) / 3
     
-    cloud_type = data.get('cloudType')
+    # Check if temperature is possible
+    if avg_temp > 134.1:
+        return jsonify({
+            'error': 'Temperature is not possible in this current day',
+            'average': int(avg_temp)
+        })
     
-    # Here you can process the data as needed
-    # For now, we'll just return it
+    # Count rainy vs non-rainy days
+    rain_count = 0
+    no_rain_count = 0
+    
+    # Process rain data
+    for day in ['R1', 'R2', 'R3']:
+        if data.get(day).lower() == 'y':
+            rain_count += 1
+        elif data.get(day).lower() == 'n':
+            no_rain_count += 1
+    
+    # Process cloud type
+    cloud_type = int(data.get('cloudType'))
+    if cloud_type == 1:
+        no_rain_count += 1
+    elif cloud_type == 2:
+        rain_count += 1
+    elif cloud_type == 3:
+        no_rain_count += 2
+    
+    # Determine prediction
+    prediction = "rain day" if rain_count > no_rain_count else "no rain day"
+    
     return jsonify({
-        'temperatures': temperatures,
-        'rain_probability': rain_probability,
+        'temperatures': {
+            't1': t1,
+            't2': t2,
+            't3': t3
+        },
+        'average_temperature': int(avg_temp),
+        'rain_probability': {
+            'day1': data.get('R1'),
+            'day2': data.get('R2'),
+            'day3': data.get('R3')
+        },
         'cloud_type': cloud_type,
-        'message': 'Data received successfully'
+        'prediction': prediction,
+        'message': 'Data processed successfully'
     })
 
 if __name__ == "__main__":
