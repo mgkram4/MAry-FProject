@@ -3,26 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Predictor</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Document</title>
 </head>
 <body>
-    <div class="bento-grid">
-        <div class="bento-item item1">
-            <p>Temperature One: {{ temperatures.temp1 }}</p>
-        </div>
-        <div class="bento-item item2">
-            <p>Temperature Two: {{ temperatures.temp2 }}</p>
-        </div>
-        <div class="bento-item item3">
-            <p>Temperature Three: {{ temperatures.temp3 }}</p>
-        </div>
-        <div class="bento-item item4">
-            <p>Temperature Four: {{ temperatures.temp4 }}</p>
-        </div>
-        <div class="bento-item item5">
-            <p>Temperature Five: {{ temperatures.temp5 }}</p>
-        </div>
+    <h1>Weather App</h1>
+
+
+<div class="left">
+    <div class="container">
+        <h2>Temperature: </h2>
     </div>
+
+
+    <div class="container1">
+        <p>T1: </p>
+        <input textarea="T1"> </input>
+        <p>T2: </p>
+        <input textarea="T2"> </input>
+        <p>T3: </p>
+        <input textarea="T3"> </input>
+    </div>
+
+
+    <div class="container2">
+        <h2>Rain probability: </h2>
+    </div>
+
+
+    <div class="container3">
+        <p>Rain on day 1 (y/n): </p>
+        <input textarea="R1"> </input>
+        <p>Rain on day 2 (y/n): </p>
+        <input textarea="R1"> </input>
+        <p>Rain on day 3 (y/n): </p>
+        <input textarea="R1"> </input>
+    </div>
+</div>
+
+
+<div class="right">
+    <div class="container4">
+        <h2>Cloud Type: </h2>
+    </div>
+
+
+    <div class="container5">
+        <p> 1. High and whispy</p>
+
+
+        <p> 2. Low and gathering </p>  
+       
+        <p> 3. Big fluffy clouds</p>
+
+
+        <input textarea="cloudType"> </input>
+    </div>
+</div>
+    <button>Submit</button>
 </body>
 </html>

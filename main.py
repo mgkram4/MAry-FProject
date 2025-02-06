@@ -1,18 +1,40 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify, render_template, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
-@app.route('/')
-def index():
-    # Example temperature data - you can replace this with real data later
+@app.route("/")
+def homepage():
+    return render_template("index.html")
+
+@app.route("/submit_weather", methods=['POST'])
+def submit_weather():
+    data = request.form
+    
+    # Extract the form data
     temperatures = {
-        'temp1': '25°C',
-        'temp2': '22°C',
-        'temp3': '28°C',
-        'temp4': '20°C',
-        'temp5': '24°C'
+        't1': data.get('T1'),
+        't2': data.get('T2'),
+        't3': data.get('T3')
     }
-    return render_template('index.html', temperatures=temperatures)
+    
+    rain_probability = {
+        'day1': data.get('R1'),
+        'day2': data.get('R2'),
+        'day3': data.get('R3')
+    }
+    
+    cloud_type = data.get('cloudType')
+    
+    # Here you can process the data as needed
+    # For now, we'll just return it
+    return jsonify({
+        'temperatures': temperatures,
+        'rain_probability': rain_probability,
+        'cloud_type': cloud_type,
+        'message': 'Data received successfully'
+    })
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
